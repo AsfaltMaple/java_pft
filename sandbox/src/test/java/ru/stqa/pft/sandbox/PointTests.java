@@ -28,4 +28,12 @@ public class PointTests {
 
     Assert.assertEquals(p1.distance(p2.x, p2.y), 5.0);
   }
+
+  @Test
+  public void tochka2i4chet() { // во 2 и 4 четвертях
+    Point p1 = new Point(-3,1);
+    Point p2 = new Point (1,-2);
+
+    Assert.assertEquals(p1.distance(p2.x, p2.y), 5.0);
+  }
 }
