@@ -1,6 +1,6 @@
 package ru.stqa.pft.sandbox;
 
-public class DistanceFunc {
+public class DistanceFunc { //расчет растояния через Функцию
 
   public static void main (String[] args) {
 
