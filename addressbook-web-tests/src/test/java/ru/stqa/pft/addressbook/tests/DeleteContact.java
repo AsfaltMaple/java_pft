@@ -1,26 +1,25 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
-import java.util.concurrent.TimeUnit;
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.Alert;
+import org.testng.annotations.Test;
 
-public class DeleteContact extends TestBase{
+import static org.testng.Assert.assertTrue;
+
+public class DeleteContact extends TestBase {
   private boolean acceptNextAlert = true;
 
 
   @Test
   public void testDeleteContact() throws Exception {
-    selectContact();
+    app.selectContact();
     acceptNextAlert = true;
-    deleteSelectedContacts();
+    app.deleteSelectedContacts();
     assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
   }
 
   private String closeAlertAndGetItsText() {
     try {
-      Alert alert = wd.switchTo().alert();
+      Alert alert = app.wd.switchTo().alert();
       String alertText = alert.getText();
       if (acceptNextAlert) {
         alert.accept();

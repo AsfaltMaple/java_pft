@@ -1,23 +1,21 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.appManager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class ApplicationManager {
     public WebDriver wd;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
-      wd = new FirefoxDriver();
-      wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      login();
+    public void init() {
+        wd = new FirefoxDriver();
+        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        login();
     }
 
     public void login() {
@@ -29,15 +27,15 @@ public class TestBase {
       wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void returnToHomePage() {
+    public void returnToHomePage() {
       wd.findElement(By.linkText("home page")).click();
     }
 
-    protected void submitContactCreation() {
+    public void submitContactCreation() {
       wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
     }
 
-    protected void fillNewContactForm(ContactData contactData) {
+    public void fillNewContactForm(ContactData contactData) {
       wd.findElement(By.name("firstname")).click();
       wd.findElement(By.name("firstname")).clear();
       wd.findElement(By.name("firstname")).sendKeys(contactData.getName());
@@ -49,15 +47,13 @@ public class TestBase {
       wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
-    protected void initNewContact() {
+    public void initNewContact() {
       wd.findElement(By.linkText("add new")).click();
     }
 
-    @AfterMethod(alwaysRun = true)
-
-    public void tearDown() throws Exception {
-      logout();
-      wd.quit();
+    public void stop() {
+        logout();
+        wd.quit();
     }
 
     public void logout() {
@@ -82,11 +78,11 @@ public class TestBase {
       }
     }
 
-    protected void deleteSelectedContacts() {
+    public void deleteSelectedContacts() {
       wd.findElement(By.xpath("//input[@value='Delete']")).click();
     }
 
-    protected void selectContact() {
+    public void selectContact() {
       wd.findElement(By.name("selected[]")).click();
     }
 }
