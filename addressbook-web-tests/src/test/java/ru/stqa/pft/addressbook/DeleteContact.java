@@ -14,16 +14,8 @@ public class DeleteContact extends TestBase{
   public void testDeleteContact() throws Exception {
     selectContact();
     acceptNextAlert = true;
-    deleteContact();
+    deleteSelectedContacts();
     assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-  }
-
-  public void deleteContact() {
-    wd.findElement(By.xpath("//input[@value='Delete']")).click();
-  }
-
-  public void selectContact() {
-    wd.findElement(By.name("selected[]")).click();
   }
 
   private String closeAlertAndGetItsText() {
