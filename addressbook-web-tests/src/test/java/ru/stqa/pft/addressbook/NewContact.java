@@ -5,45 +5,44 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ContactTests {
+public class NewContact {
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/index.php");
-    login("admin", "secret");
+    login();
   }
 
-  private void login(String login, String password) {
+  private void login() {
+    wd.get("http://localhost/addressbook/index.php");
     wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(login);
-    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("user")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
+  public void testNewContact() throws Exception {
 
-    gotoContactPage();
     initNewContact();
-    fillContactForm(new ContactData("Margarita", "O", "solentuna@gmail.com"));
-    submitContact();
-    logout();
+    fillNewContactForm(new ContactData("Brusnika", "Severnaya", "brus@sever.ru"));
+    submitContactCreation();
+    returnToHomePage();
+
   }
 
-  private void logout() {
-    wd.findElement(By.linkText("Logout")).click();
+  private void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
   }
 
-  private void submitContact() {
+  private void submitContactCreation() {
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  private void fillContactForm(ContactData contactData) {
+  private void fillNewContactForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contactData.getName());
@@ -59,13 +58,15 @@ public class ContactTests {
     wd.findElement(By.linkText("add new")).click();
   }
 
-  private void gotoContactPage() {
-    wd.findElement(By.id("footer")).click();
+  @AfterMethod(alwaysRun = true)
+
+  public void tearDown() throws Exception {
+    logout();
+    wd.quit();
   }
 
-  @AfterMethod(alwaysRun = true)
-  public void tearDown() throws Exception {
-    wd.quit();
+  private void logout() {
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
@@ -85,5 +86,4 @@ public class ContactTests {
       return false;
     }
   }
-
 }
