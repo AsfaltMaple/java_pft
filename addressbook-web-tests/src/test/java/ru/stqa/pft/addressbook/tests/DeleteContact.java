@@ -7,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 
 public class DeleteContact extends TestBase {
   private boolean acceptNextAlert = true;
-
+//есть строчка с алертом!!
 
   @Test
   public void testDeleteContact() throws Exception {
