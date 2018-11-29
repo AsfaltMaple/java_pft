@@ -13,11 +13,6 @@ public class NewContactCreation extends TestBase {
         app.getContactHelper().submitContactCreation();
         app.getContactHelper().returnToHomePage();
 
-        app.getContactHelper().initNewContact();
-        app.getContactHelper().fillNewContactForm(new ContactData("Brusnika3", "Severnaya2", "brus2@sever.ru"));
-        app.getContactHelper().submitContactCreation();
-        app.getContactHelper().returnToHomePage();
-
     }
 
 }
