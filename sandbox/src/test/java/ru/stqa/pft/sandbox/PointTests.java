@@ -10,7 +10,7 @@ public class PointTests {
     Point p1 = new Point(0,0);
     Point p2 = new Point (4,3);
 
-    Assert.assertEquals(p1.distance(p2.x, p2.y), 5.0);
+    Assert.assertEquals(p1.distance(p2), 5.0);
   }
 
   @Test
@@ -18,7 +18,7 @@ public class PointTests {
     Point p1 = new Point(8,1);
     Point p2 = new Point (8,1);
 
-    Assert.assertEquals(p1.distance(p2.x, p2.y), 0.0);
+    Assert.assertEquals(p1.distance(p2), 0.0);
   }
 
   @Test
@@ -26,7 +26,7 @@ public class PointTests {
     Point p1 = new Point(-4,-5);
     Point p2 = new Point (-7,-9);
 
-    Assert.assertEquals(p1.distance(p2.x, p2.y), 5.0);
+    Assert.assertEquals(p1.distance(p2), 5.0);
   }
 
   @Test
@@ -34,6 +34,6 @@ public class PointTests {
     Point p1 = new Point(-3,1);
     Point p2 = new Point (1,-2);
 
-    Assert.assertEquals(p1.distance(p2.x, p2.y), 5.0);
+    Assert.assertEquals(p1.distance(p2), 5.0);
   }
 }
