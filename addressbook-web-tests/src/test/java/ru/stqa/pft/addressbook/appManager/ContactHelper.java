@@ -16,7 +16,12 @@ public class ContactHelper {
   }
 
   public void submitContactCreation() {
-    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    submitCreation();
+    // wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  private void submitCreation() {
+    wd.findElement(By.name("submit")).click();
   }
 
   public void fillNewContactForm(ContactData contactData) {
@@ -41,6 +46,10 @@ public class ContactHelper {
   }
 
   public void selectContact() {
+    selectElement();
+  }
+
+  private void selectElement() {
     wd.findElement(By.name("selected[]")).click();
   }
 }

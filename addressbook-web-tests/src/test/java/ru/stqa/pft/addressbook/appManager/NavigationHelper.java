@@ -11,6 +11,10 @@ public class NavigationHelper {
   }
 
   public void gotoGroupPage() {
+    groupFolder();
+  }
+
+  private void groupFolder() {
     wd.findElement(By.linkText("groups")).click();
   }
 }

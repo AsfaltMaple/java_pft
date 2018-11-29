@@ -15,10 +15,18 @@ public class SessionHelper {
     wd.findElement(By.name("user")).sendKeys(username);
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys(password);
+    loginButton();
+  }
+
+  private void loginButton() {
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   public void logout() {
+    logoutButton();
+  }
+
+  private void logoutButton() {
     wd.findElement(By.linkText("Logout")).click();
   }
 }
