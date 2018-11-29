@@ -16,11 +16,11 @@ public class Distance {
 
 
     System.out.println("Расстояние между точками p1(" + p1.x + ";" + p1.y + ") и p2("
-            + p2.x + ";" + p2.y + ") = " + p1.distance(p2.x, p2.y)); //через метод
+            + p2.x + ";" + p2.y + ") = " + p1.distance(p2)); //через метод
     //(p2.x, p2.y) - значения для р2 передаются в метод как параметры, а для р1 (p1.distance) - через ссылку this в методе
 
     System.out.println("Расстояние между точками p3(" + p3.x + ";" + p3.y + ") и p4("
-            + p4.x + ";" + p4.y + ") = " + p3.distance(p4.x, p4.y));
+            + p4.x + ";" + p4.y + ") = " + p3.distance(p4));
 
   }
   public static double distance(Point p1, Point p2) {
