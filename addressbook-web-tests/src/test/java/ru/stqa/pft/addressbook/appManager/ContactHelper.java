@@ -11,7 +11,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void returnToHomePage() {
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 
   public void submitContactCreation() {
