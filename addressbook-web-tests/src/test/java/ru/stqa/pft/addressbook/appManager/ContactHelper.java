@@ -77,9 +77,12 @@ public class ContactHelper extends BaseHelper {
 //By.cssSelector("form#MainForm tr")
         for (WebElement element: elements) {
             String name = element.getText();
-            ContactData contact = new ContactData(name, null, null, null);
+            String lastname = element.getText();
+            String email = element.getText();
+            ContactData contact = new ContactData(name, lastname, email, null);
             contacts.add(contact);
         }
         return contacts;
     }
+
 }
