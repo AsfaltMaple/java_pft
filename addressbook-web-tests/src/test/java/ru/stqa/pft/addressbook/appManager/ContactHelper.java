@@ -73,9 +73,10 @@ public class ContactHelper extends BaseHelper {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.name("selected[]"));
+        List<WebElement> elements = wd.findElements(By.tagName("tr[name=entry]"));
 //By.cssSelector("form#MainForm tr")
         for (WebElement element: elements) {
+            //String id = element.findElement(By.tagName("input")).getAttribute("value");
             String name = element.getText();
             String lastname = element.getText();
             String email = element.getText();

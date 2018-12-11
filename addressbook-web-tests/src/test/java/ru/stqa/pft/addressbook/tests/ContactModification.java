@@ -19,11 +19,16 @@ public class ContactModification extends TestBase{
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().initContactModification ();
-    app.getContactHelper().fillContactForm(
-            new ContactData("luk","zloy","luk@zloy.ru",null), false);
+    ContactData contact = new ContactData("luk","zloy","luk@zloy.ru",null);
+    app.getContactHelper().fillContactForm(contact,false);
     app.getContactHelper().submitContactModification ();
     app.getContactHelper().returnToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
+
+
+   // before.remove(before.size() - 1);
+    //before.add(contact);
+    //Assert.assertEquals(before, after);
   }
 }
