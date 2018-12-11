@@ -29,10 +29,11 @@ public class ContactHelper extends BaseHelper {
         type(By.name("firstname"), contactData.getName());
         type(By.name("lastname"), contactData.getSurname());
         type(By.name("email"), contactData.getEmail());
-        if (creation) {
+        if ( creation ) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));}
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initNewContact() {
@@ -73,14 +74,13 @@ public class ContactHelper extends BaseHelper {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.tagName("tr[name=entry]"));
-//By.cssSelector("form#MainForm tr")
-        for (WebElement element: elements) {
-            //String id = element.findElement(By.tagName("input")).getAttribute("value");
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+        for (WebElement element : elements) {
+            String id = element.findElement(By.cssSelector("td")).getAttribute("Value");
             String name = element.getText();
             String lastname = element.getText();
             String email = element.getText();
-            ContactData contact = new ContactData(name, lastname, email, null);
+            ContactData contact = new ContactData(id, name, lastname, email, null);
             contacts.add(contact);
         }
         return contacts;
