@@ -13,7 +13,7 @@ public class DeleteContact extends TestBase {
   public void testDeleteContact() throws Exception {
     if (! app.getContactHelper().isThereAContact() ) {
       app.getContactHelper().createContact(new ContactData(
-              "Brusnika2", "severnaya2", "brus2@sever.ru","test1"), true);
+              index, "Brusnika2", "severnaya2", "brus2@sever.ru","test1"), true);
     }
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size() - 1);
