@@ -68,24 +68,18 @@ public class ContactHelper extends BaseHelper {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public void getCell(int index) {
-        List<WebElement> cell = wd.findElements(By.cssSelector("td[name = entry] > td"));
-    }
-
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]")); // строки
         for (WebElement element : elements) {
-            String id = element.findElement(By.cssSelector("td")).findElement(By.tagName("input")).getAttribute("value");
-            String lastname = getCell(0).getText();
-            String name = getCell(1).getText();
+            String id = element.findElement(By.tagName("input")).getAttribute("id");
+                       // element.findElement(By.tagName("input")).getAttribute("value");
+            List<WebElement> cells = element.findElements(By.cssSelector("td"));
+            String lastname = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            ContactData contact = new ContactData(id, lastname, name);
+            contacts.add(contact);
         }
-        ContactData contact = new ContactData(id, lastname, name, null);
-        contacts.add(contact);
         return contacts;
 
     }
