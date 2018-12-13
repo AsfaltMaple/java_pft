@@ -23,6 +23,11 @@ public class DeleteGroup extends TestBase {
     Assert.assertEquals(after.size(), before.size() - 1);
 
     before.remove(before.size() - 1); //вообще проходит циклом по элементам, но тестовый ФВ сам умеет сравнивать циклы в ассертИквалс
+    for (int i = 0; i <after.size(); i++) {
+      Assert.assertEquals(before.get(i), after.get(i));
+    }
+
+
     Assert.assertEquals(before, after);
   }
 }
