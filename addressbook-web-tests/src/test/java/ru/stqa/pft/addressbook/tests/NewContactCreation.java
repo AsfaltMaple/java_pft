@@ -7,10 +7,11 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.Comparator;
 import java.util.List;
 
-public class ANewContactCreation extends TestBase {
+public class NewContactCreation extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {
+    app.goTo().homePage();
     List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru").withGroup("test345");
     app.contact().create(contact, true);
