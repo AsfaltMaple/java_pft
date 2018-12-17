@@ -47,6 +47,20 @@ public class GroupHelper extends BaseHelper { //помощник по работ
     click(By.name("update"));
   }
 
+  public void deletionGroup(int index) {
+    groupSelection(index);
+    deleteSelectedGroup();
+    returnToGroupPage();
+  }
+
+  public void mofifyGroup(int index, GroupData group) {
+    groupSelection(index);
+    initGroupModification ();
+    fillGroupForm(group);
+    submitGroupModification ();
+    returnToGroupPage();
+  }
+
   public void createGroup(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);

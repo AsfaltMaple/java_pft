@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
-public class NewContactCreation extends TestBase {
+public class ANewContactCreation extends TestBase {
 
   @Test
   public void testNewContact() throws Exception {
