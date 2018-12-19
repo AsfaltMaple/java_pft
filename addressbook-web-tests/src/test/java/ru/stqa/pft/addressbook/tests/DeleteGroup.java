@@ -1,11 +1,18 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class DeleteGroup extends TestBase {
 
@@ -19,16 +26,11 @@ public class DeleteGroup extends TestBase {
 
   @Test
   public void testDeleteGroup() throws Exception {
-    Set<GroupData> before = app.group().all();
+    Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
-    Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(), before.size() - 1);
-
-    before.remove(deletedGroup); //вообще проходит циклом по элементам, но тестовый ФВ сам умеет сравнивать циклы в ассертИквалс
-
-      Assert.assertEquals(before, after);
-
-    Assert.assertEquals(before, after);
+    Groups after = app.group().all();
+    assertEquals(after.size(), before.size() - 1);
+    assertThat(after, equalTo(after.without(deletedGroup)));
   }
 }
