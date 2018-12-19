@@ -23,19 +23,23 @@ public class NewContactCreation extends TestBase {
     ContactData contact = new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru").withGroup("test345");
     app.contact().create(contact, true);
     app.goTo().homePage();
+    assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() + 1));
-
-    //int max = 0;
-    // for (ContactData c : after) { //переменная проходится по всем объекта грДата из списка После создания нового
-    //  if (c.getId() > max) {
-    //    max = c.getId();
-    //   }
-    // }
-    //contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
-
     assertThat(after, equalTo(before.withAddedContacts(
             contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+
+  }
+
+  @Test
+  public void testNewBadContact() throws Exception {
+    app.goTo().homePage();
+    Contacts before = app.contact().all();
+    ContactData contact = new ContactData().withSurname("severnaya2").withName("Brusnika2'").withEmail("brus2@sever.ru").withGroup("test345");
+    app.contact().create(contact, true);
+    app.goTo().homePage();
+    assertThat(app.contact().getContactCount(), equalTo(before.size()));
+    Contacts after = app.contact().all();
+    assertThat(after, equalTo(before));
 
   }
 

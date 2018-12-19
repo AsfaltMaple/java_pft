@@ -17,17 +17,20 @@ public class GroupCreation extends TestBase {
     GroupData group = new GroupData().withName("test1");
     app.group().create(group);
     Groups after = app.group().all();
-    assertThat(after.size(), equalTo(before.size() + 1));
-
-    //int max = 0;
-   // for (GroupData g: after) {
-   //   if (g.getId() > max) {
-   //     max = g.getId();
-   //   }
-   // }
-   // group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); - и так новый элемен будет с макс.идентификатором
-
+    assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(
             group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test
+  public void testBadGroupCreation() throws Exception {
+
+    app.goTo().groupPage();
+    Groups before = app.group().all();
+    GroupData group = new GroupData().withName("test1'");
+    app.group().create(group);
+    assertThat(app.group().getGroupCount(), equalTo(before.size()));
+    Groups after = app.group().all();
+    assertThat(after, equalTo(before));
   }
 }

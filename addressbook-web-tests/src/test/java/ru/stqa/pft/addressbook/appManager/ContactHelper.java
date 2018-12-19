@@ -137,4 +137,8 @@ public class ContactHelper extends BaseHelper {
         return new Contacts(contactCache);
 
     }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
