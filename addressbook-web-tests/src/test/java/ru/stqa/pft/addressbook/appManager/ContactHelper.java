@@ -152,8 +152,8 @@ public class ContactHelper extends BaseHelper {
 
     public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();  //ок
-    //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id= %s']", id))).click(); //- не работает
+    //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); //- ок
     //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //- ок
-    //wd.findElement(By.xpath(String.format("tr[.//input[@value='%s']]/td[8]/a",id))).click(); //- не работает
+    //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click(); //- ок
     }
 }
