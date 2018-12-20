@@ -61,10 +61,6 @@ public class ContactHelper extends BaseHelper {
         wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
-    public void initContactModificationById(int id) {
-        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
-    }
-
     public void submitContactModification() {
         click(By.name("update"));
     }
@@ -140,5 +136,24 @@ public class ContactHelper extends BaseHelper {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public ContactData contactInfoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().
+                withId(contact.getId()).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+    }
+
+    public void initContactModificationById(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();  //ок
+    //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id= %s']", id))).click(); //- не работает
+    //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //- ок
+    //wd.findElement(By.xpath(String.format("tr[.//input[@value='%s']]/td[8]/a",id))).click(); //- не работает
     }
 }

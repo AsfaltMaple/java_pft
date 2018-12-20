@@ -9,16 +9,26 @@ public class ContactData {
     private String surname;
     private String group;
     private String email;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
 
 
     public ContactData withId(int id) { this.id = id; return this;}
-
     public ContactData withName(String name) {
         this.name = name; return this;
     }
-
     public ContactData withSurname(String surname) {
         this.surname = surname; return this;
+    }
+    public ContactData withHomePhone(String home) {
+        this.homePhone = home; return this;
+    }
+    public ContactData withMobilePhone(String mobile) {
+        this.mobilePhone = mobile; return this;
+    }
+    public ContactData withWorkPhone(String work) {
+        this.workPhone = work; return this;
     }
 
     @Override
