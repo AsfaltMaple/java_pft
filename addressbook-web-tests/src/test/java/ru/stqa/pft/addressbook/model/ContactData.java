@@ -15,6 +15,8 @@ public class ContactData {
     private String address;
     private String email2;
     private String email3;
+    private String allPhones;
+    private String allEmails;
 
 
 
@@ -48,6 +50,12 @@ public class ContactData {
     }
     public ContactData withEmail(String email) {
         this.email = email; return this;
+    }
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones; return this;
+    }
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails; return this;
     }
 
     @Override
@@ -103,6 +111,12 @@ public class ContactData {
     public String getEmail3() {
         return email3;
     }
+    public String getAllPhones() {
+        return allPhones;
+    }
+    public String getAllEmails() {
+        return allEmails;
+    }
 
     @Override
     public String toString() {
@@ -112,4 +126,6 @@ public class ContactData {
                 ", surname='" + surname + '\'' +
                 '}';
     }
+
+
 }
