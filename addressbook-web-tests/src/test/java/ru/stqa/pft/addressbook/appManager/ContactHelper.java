@@ -32,6 +32,7 @@ public class ContactHelper extends BaseHelper {
         type(By.name("firstname"), contactData.getName());
         type(By.name("lastname"), contactData.getSurname());
         type(By.name("email"), contactData.getEmail());
+        attach(By.name("photo"), contactData.getPhoto());
         if ( creation ) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {

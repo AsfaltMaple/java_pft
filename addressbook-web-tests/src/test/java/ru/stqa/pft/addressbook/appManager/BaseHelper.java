@@ -5,6 +5,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BaseHelper {
@@ -30,6 +31,13 @@ public class BaseHelper {
 
         }
     }
+
+    protected void attach (By locator, File file) {
+        if ( file != null )
+                wd.findElement(locator).sendKeys(file.getAbsolutePath());
+
+    }
+
   public boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);
