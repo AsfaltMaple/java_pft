@@ -31,6 +31,7 @@ public class NewContactCreation extends TestBase {
     assertThat(after, equalTo(before.withAddedContacts(
             contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
+//добавить проверку картинки
   }
 
   @Test(enabled = false)

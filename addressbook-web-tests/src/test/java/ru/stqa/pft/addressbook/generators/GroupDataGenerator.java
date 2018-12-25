@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroupDataGenerator {
+public class GroupDataGenerator { //и для контактов сделать
 
     public static void main(String[] args) throws IOException {
         int count = Integer.parseInt(args[0]);
@@ -24,7 +24,7 @@ public class GroupDataGenerator {
         System.out.println(new File(".").getAbsolutePath());
         Writer writer = new FileWriter(file);
         for (GroupData group: groups ) {
-            Writer.write (String.format("$s;$s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+            writer.write (String.format("%s; %s; %s\n", group.getName(), group.getHeader(), group.getFooter()));
         }
         writer.close();
     }
