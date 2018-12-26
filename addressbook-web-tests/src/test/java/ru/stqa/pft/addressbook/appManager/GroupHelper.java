@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appManager;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

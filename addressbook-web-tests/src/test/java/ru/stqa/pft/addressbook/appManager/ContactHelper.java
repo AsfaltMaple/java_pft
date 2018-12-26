@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 public class ContactHelper extends BaseHelper {
 
     public ContactHelper(WebDriver wd) {
@@ -36,7 +37,7 @@ public class ContactHelper extends BaseHelper {
         if ( creation ) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 

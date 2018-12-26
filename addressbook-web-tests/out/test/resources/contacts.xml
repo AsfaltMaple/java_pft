@@ -1,0 +1,30 @@
+<list>
+  <contact>
+    <name>name 0</name>
+    <surname>lastname 0</surname>
+    <email>test@mail.ru</email>
+    <homePhone>1234567</homePhone>
+    <address>adres 0</address>
+  </contact>
+  <contact>
+    <name>name 1</name>
+    <surname>lastname 1</surname>
+    <email>test@mail.ru</email>
+    <homePhone>1234567</homePhone>
+    <address>adres 1</address>
+  </contact>
+  <contact>
+    <name>name 2</name>
+    <surname>lastname 2</surname>
+    <email>test@mail.ru</email>
+    <homePhone>1234567</homePhone>
+    <address>adres 2</address>
+  </contact>
+  <contact>
+    <name>name 3</name>
+    <surname>lastname 3</surname>
+    <email>test@mail.ru</email>
+    <homePhone>1234567</homePhone>
+    <address>adres 3</address>
+  </contact>
+</list>
