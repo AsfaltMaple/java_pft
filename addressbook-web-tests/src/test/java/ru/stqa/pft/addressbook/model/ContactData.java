@@ -89,7 +89,6 @@ public class ContactData {
         return Objects.hash(id, name, surname);
     }
 
-
     public int getId() { return id; }
 
     public String getName() {
