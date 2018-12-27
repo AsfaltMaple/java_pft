@@ -18,73 +18,74 @@ import java.util.List;
 
 public class ContactDataGenerator {
 
-    @Parameter(names = "-c", description = "Group count")
-    public int count;
+  @Parameter(names = "-c", description = "Group count")
+  public int count;
 
-    @Parameter(names = "-f", description = "Target file")
-    public String file;
+  @Parameter(names = "-f", description = "Target file")
+  public String file;
 
-    @Parameter(names = "-d", description = "Data format")
-    public String format;
+  @Parameter(names = "-d", description = "Data format")
+  public String format;
 
-    public static void main (String[] args) throws IOException {
-        ContactDataGenerator generator = new ContactDataGenerator();
-        JCommander jCommander = new JCommander(generator);
-        try {
-            jCommander.parse(args);
-        } catch (ParameterException ex) {
-            jCommander.usage();
-            return;
-        }
-        generator.run();
+  public static void main(String[] args) throws IOException {
+    ContactDataGenerator generator = new ContactDataGenerator();
+    JCommander jCommander = new JCommander(generator);
+    try {
+      jCommander.parse(args);
+    } catch (ParameterException ex) {
+      jCommander.usage();
+      return;
     }
+    generator.run();
+  }
 
-    private void run() throws IOException {
-        List<ContactData> contacts = generateContacts(count);
-        if ( format.equals("csv") ) {
-            saveAsCsv(contacts, new File(file));
-        } else if (format.equals("xml")){
-            saveAsXml(contacts, new File(file));
-        } else if (format.equals("json")){
-            saveAsJson(contacts, new File(file));
-        } else {
-            System.out.println("Unrecognized format");
-        }
+  private void run() throws IOException {
+    List<ContactData> contacts = generateContacts(count);
+    if (format.equals("csv")) {
+      saveAsCsv(contacts, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXml(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(contacts, new File(file));
+    } else {
+      System.out.println("Unrecognized format");
     }
+  }
 
-    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-        String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+  private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
     }
+  }
 
-    private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        String xml = xstream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+  private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
+    XStream xstream = new XStream();
+    xstream.processAnnotations(ContactData.class);
+    String xml = xstream.toXML(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
     }
+  }
 
-    private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        System.out.println(new File(".").getAbsolutePath());
-        Writer writer = new FileWriter(file);
-        for (ContactData contact: contacts) {
-            writer.write(String.format("%s; %s; %s; %s; %s\n", contact.getName(),
-                    contact.getSurname(), contact.getEmail(),  contact.getHomePhone(),contact.getAddress()));
-        }
-        writer.close();
+  private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
+    System.out.println(new File(".").getAbsolutePath());
+    try (Writer writer = new FileWriter(file)) {
+      for (ContactData contact : contacts) {
+        writer.write(String.format("%s; %s; %s; %s; %s\n", contact.getName(),
+                contact.getSurname(), contact.getEmail(), contact.getHomePhone(), contact.getAddress()));
+      }
     }
+  }
 
-    private List<ContactData> generateContacts(int count) {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        for (int i = 0; i < count; i++) {
-            contacts.add(new ContactData().withName(String.format("name %s", i)).withSurname(String.format("lastname %s", i)).
-                    withEmail("test@mail.ru").withHomePhone("1234567").withAddress(String.format("adres %s", i)));}
-            return contacts; //как добавить email и телефон?
-        }
+  private List<ContactData> generateContacts(int count) {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    for (int i = 0; i < count; i++) {
+      contacts.add(new ContactData().withName(String.format("name %s", i)).withSurname(String.format("lastname %s", i)).
+              withEmail("test@mail.ru").withHomePhone("1234567").withAddress(String.format("adres %s", i)));
+    }
+    return contacts;
+  }
 
 }
