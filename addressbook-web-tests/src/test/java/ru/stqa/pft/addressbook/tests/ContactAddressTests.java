@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -24,8 +26,6 @@ public class ContactAddressTests extends TestBase {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().contactInfoFromEditForm(contact);
-
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-
     }
 }
