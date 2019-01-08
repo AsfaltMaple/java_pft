@@ -32,6 +32,7 @@ public class ContactData {
 
     @Expose
     @Column(name = "email")
+    @Type(type = "text")
     private String email;
 
     @Expose
@@ -53,9 +54,11 @@ public class ContactData {
     private String address;
 
     @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
 
     @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
 
     @Transient
