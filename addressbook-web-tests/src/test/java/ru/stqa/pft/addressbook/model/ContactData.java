@@ -21,11 +21,11 @@ public class ContactData {
 
     @Expose
     @Column(name = "firstname")
-    private String name;
+    private String name = null;
 
     @Expose
     @Column(name = "lastname")
-    private String surname;
+    private String surname = null;
 
     @Transient
     private String group;
@@ -33,33 +33,33 @@ public class ContactData {
     @Expose
     @Column(name = "email")
     @Type(type = "text")
-    private String email;
+    private String email = null;
 
     @Expose
     @Column(name = "home")
     @Type(type = "text")
-    private String homePhone;
+    private String homePhone = null;
 
     @Column(name = "mobile")
     @Type(type = "text")
-    private String mobilePhone;
+    private String mobilePhone = null;
 
     @Column(name = "work")
     @Type(type = "text")
-    private String workPhone;
+    private String workPhone = null;
 
     @Expose
     @Column(name = "address")
     @Type(type = "text")
-    private String address;
+    private String address = null;
 
     @Column(name = "email2")
     @Type(type = "text")
-    private String email2;
+    private String email2 = null;
 
     @Column(name = "email3")
     @Type(type = "text")
-    private String email3;
+    private String email3 = null;
 
     @Transient
     private String allPhones;
@@ -67,6 +67,7 @@ public class ContactData {
     @Transient
     private String allEmails;
 
+    @Transient
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
