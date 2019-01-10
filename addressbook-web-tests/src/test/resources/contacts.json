@@ -5,26 +5,5 @@
     "email": "test@mail.ru",
     "homePhone": "1234567",
     "address": "adres 0"
-  },
-  {
-    "name": "name 1",
-    "surname": "lastname 1",
-    "email": "test@mail.ru",
-    "homePhone": "1234567",
-    "address": "adres 1"
-  },
-  {
-    "name": "name 2",
-    "surname": "lastname 2",
-    "email": "test@mail.ru",
-    "homePhone": "1234567",
-    "address": "adres 2"
-  },
-  {
-    "name": "name 3",
-    "surname": "lastname 3",
-    "email": "test@mail.ru",
-    "homePhone": "1234567",
-    "address": "adres 3"
   }
 ]
