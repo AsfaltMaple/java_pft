@@ -67,7 +67,6 @@ public class ContactData {
     @Transient
     private String allEmails;
 
-    @Transient
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;

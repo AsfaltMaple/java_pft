@@ -36,7 +36,8 @@ public class ContactModification extends TestBase {
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("lukovka").withSurname("zlaya").withAddress("adr").
             withHomePhone("1243").withMobilePhone("86548").withWorkPhone("6573").withEmail("mail1@pochta.ru").withEmail2("mail2@pochta.ru").
-            withEmail3("mail3@pochta.ru");    app.goTo().homePage();
+            withEmail3("mail3@pochta.ru");
+    app.goTo().homePage();
     app.contact().modify(contact);
     assertThat(app.contact().getContactCount(), equalTo(before.size()));
     Contacts after = app.db().contacts();
