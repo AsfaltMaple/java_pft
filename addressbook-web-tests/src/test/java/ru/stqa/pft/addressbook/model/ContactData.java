@@ -62,10 +62,10 @@ public class ContactData {
     private String email3 = "";
 
     @Transient
-    private String allPhones;
+    private String allPhones = "";
 
     @Transient
-    private String allEmails;
+    private String allEmails = "";
 
     @Transient
     @Column(name = "photo")
@@ -205,16 +205,6 @@ public class ContactData {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", group='" + group + '\'' +
-                ", email='" + email + '\'' +
-                ", homePhone='" + homePhone + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                ", workPhone='" + workPhone + '\'' +
-                ", address='" + address + '\'' +
-                ", email2='" + email2 + '\'' +
-                ", email3='" + email3 + '\'' +
-                ", allPhones='" + allPhones + '\'' +
-                ", allEmails='" + allEmails + '\'' +
                 '}';
     }
 
@@ -225,21 +215,11 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(surname, that.surname) &&
-                Objects.equals(group, that.group) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(homePhone, that.homePhone) &&
-                Objects.equals(mobilePhone, that.mobilePhone) &&
-                Objects.equals(workPhone, that.workPhone) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(email2, that.email2) &&
-                Objects.equals(email3, that.email3) &&
-                Objects.equals(allPhones, that.allPhones) &&
-                Objects.equals(allEmails, that.allEmails);
+                Objects.equals(surname, that.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, group, email, homePhone, mobilePhone, workPhone, address, email2, email3, allPhones, allEmails);
+        return Objects.hash(id, name, surname);
     }
 }

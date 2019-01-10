@@ -79,6 +79,7 @@ public class NewContactCreation extends TestBase {
         File photo = new File("src/test/resources/574.png");
         System.out.println(photo.getAbsolutePath());
         System.out.println(photo.exists());
+        verifyContactListInUI();
     }
 
     @Test(enabled = false)
