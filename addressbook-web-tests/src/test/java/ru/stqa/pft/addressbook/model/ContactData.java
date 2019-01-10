@@ -21,45 +21,45 @@ public class ContactData {
 
     @Expose
     @Column(name = "firstname")
-    private String name = null;
+    private String name = "";
 
     @Expose
     @Column(name = "lastname")
-    private String surname;
+    private String surname = "";
 
     @Transient
-    private String group;
+    private String group = "";
 
     @Expose
     @Column(name = "email")
     @Type(type = "text")
-    private String email;
+    private String email = "";
 
     @Expose
     @Column(name = "home")
     @Type(type = "text")
-    private String homePhone;
+    private String homePhone = "";
 
     @Column(name = "mobile")
     @Type(type = "text")
-    private String mobilePhone = null;
+    private String mobilePhone = "";
 
     @Column(name = "work")
     @Type(type = "text")
-    private String workPhone;
+    private String workPhone = "";
 
     @Expose
     @Column(name = "address")
     @Type(type = "text")
-    private String address;
+    private String address = "";
 
     @Column(name = "email2")
     @Type(type = "text")
-    private String email2;
+    private String email2 = "";
 
     @Column(name = "email3")
     @Type(type = "text")
-    private String email3;
+    private String email3 = "";
 
     @Transient
     private String allPhones;
@@ -213,6 +213,8 @@ public class ContactData {
                 ", address='" + address + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
+                ", allPhones='" + allPhones + '\'' +
+                ", allEmails='" + allEmails + '\'' +
                 '}';
     }
 
@@ -231,11 +233,13 @@ public class ContactData {
                 Objects.equals(workPhone, that.workPhone) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(email2, that.email2) &&
-                Objects.equals(email3, that.email3);
+                Objects.equals(email3, that.email3) &&
+                Objects.equals(allPhones, that.allPhones) &&
+                Objects.equals(allEmails, that.allEmails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, group, email, homePhone, mobilePhone, workPhone, address, email2, email3);
+        return Objects.hash(id, name, surname, group, email, homePhone, mobilePhone, workPhone, address, email2, email3, allPhones, allEmails);
     }
 }
