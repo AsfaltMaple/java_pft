@@ -86,7 +86,7 @@ public class NewContactCreation extends TestBase {
     public void testNewBadContact() throws Exception {
         app.goTo().homePage();
         Contacts before = app.contact().all();
-        ContactData contact = new ContactData().withSurname("severnaya2").withName("Brusnika2'").withEmail("brus2@sever.ru").withGroup("test345");
+        ContactData contact = new ContactData().withSurname("severnaya2").withName("Brusnika2'").withEmail("brus2@sever.ru");
         app.contact().create(contact, true);
         app.goTo().homePage();
         assertThat(app.contact().getContactCount(), equalTo(before.size()));
