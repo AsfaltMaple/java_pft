@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appManager;
 
+import org.hibernate.SessionFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,14 +8,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class ContactHelper extends BaseHelper {
+
+    private SessionFactory sessionFactory;
 
     public ContactHelper(WebDriver wd) {
         super(wd);
@@ -39,14 +41,17 @@ public class ContactHelper extends BaseHelper {
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("work"), contactData.getWorkPhone());
         type(By.name("address"), contactData.getAddress());
-       // attach(By.name("photo"), contactData.getPhoto());
+        // attach(By.name("photo"), contactData.getPhoto());
 
 
-        // if ( creation ) {
-       //     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-       // } else {
-       // Assert.assertFalse(isElementPresent(By.name("new_group")));
-      //  }
+        if ( creation ) {
+            if ( contactData.getGroups().size() > 0 ) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            } else {
+                Assert.assertFalse(isElementPresent(By.name("new_group")));
+            }
+        }
     }
 
     public void initNewContact() {
@@ -127,7 +132,7 @@ public class ContactHelper extends BaseHelper {
     private Contacts contactCache = null;
 
     public Contacts all() {
-        if (contactCache != null) {
+        if ( contactCache != null ) {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
@@ -170,8 +175,63 @@ public class ContactHelper extends BaseHelper {
 
     public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();  //ок
-    //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); //- ок
-    //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //- ок
-    //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click(); //- ок
+        //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); //- ок
+        //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //- ок
+        //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click(); //- ок
+    }
+
+    public void addToGroup() {
+        click(By.name("add"));
+    }
+
+    public ContactData addGrToCont(ContactData conts) {
+        if ( conts.getGroups().size() > 0 ) {
+            Assert.assertTrue(conts.getGroups().size() == 1);
+            List<ContactData> contacts = new ArrayList<ContactData>();
+            selectContactById(conts.getId());
+            return new ContactData().withName(conts.getName()).withSurname(conts.getSurname()).withHomePhone(conts.getHomePhone()).withMobilePhone(conts.getMobilePhone())
+                    .withWorkPhone(conts.getWorkPhone()).withEmail(conts.getEmail()).withEmail2(conts.getEmail2()).withEmail3(conts.getEmail3());
+
+
+            //for (ContactData grs : contacts) {
+              //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(grs.getGroups().iterator().next().getName());
+                //addToGroup();
+            //}
+        }
+        return conts;
     }
 }
+            //      groupCache.add(new GroupData().withId(id).withName(name));
+       // }
+       //ContactData cont =
+       // ContactData movedContact = before.iterator().next();
+        //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
+        //selectContactById(contact.getId());
+       // new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+       // addToGroup();
+       // contactCache = null;
+       // returnToHomePage();
+      //  if ( contactData.getGroups().size() > 0 ) {
+      //      Assert.assertTrue(contactData.getGroups().size() == 1);
+      //      new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      //  }
+   // }
+    // List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    //    for (WebElement element: elements ) {
+    //      String name = element.getText();
+    //      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+    //      groupCache.add(new GroupData().withId(id).withName(name));
+
+
+    // public List<ContactData> list() {
+    //        List<ContactData> contacts = new ArrayList<ContactData>();
+    //        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]")); // строки
+    //        for (WebElement element : elements) {
+    //            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+    //            List<WebElement> cells = element.findElements(By.cssSelector("td"));
+    //            String lastname = cells.get(1).getText();
+    //            String name = cells.get(2).getText();
+    //            ContactData contact = new ContactData().withId(id).withSurname(lastname).withName(name);
+    //            contacts.add(contact);
+    //        }
+    //        return contacts;

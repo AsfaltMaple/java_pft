@@ -88,9 +88,10 @@ public class GroupData {
         return footer;
     }
 
-    public Set<ContactData> getContacts() {
+    public Contacts getContacts() {
             return new Contacts(contacts);
     }
+
 
 }
 
