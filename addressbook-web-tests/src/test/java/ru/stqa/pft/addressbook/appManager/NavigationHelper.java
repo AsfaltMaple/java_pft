@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appManager;
 
+import org.hibernate.sql.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,4 +24,5 @@ public class NavigationHelper extends BaseHelper {
     }
     click(By.linkText("home"));
   }
+
 }

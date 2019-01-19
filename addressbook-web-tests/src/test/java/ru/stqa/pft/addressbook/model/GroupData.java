@@ -91,6 +91,10 @@ public class GroupData {
     public Contacts getContacts() {
             return new Contacts(contacts);
     }
+    public GroupData withContact (ContactData contact) {
+        contacts.add(contact);
+        return this;
+    }
 
 
 }

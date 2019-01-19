@@ -54,6 +54,18 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+    public void fillContactFormWithoutGroup(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getName());
+        type(By.name("lastname"), contactData.getSurname());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
+        type(By.name("address"), contactData.getAddress());
+    }
+
     public void initNewContact() {
         click(By.linkText("add new"));
     }
@@ -105,6 +117,14 @@ public class ContactHelper extends BaseHelper {
     public void create(ContactData contact, boolean b) {
         initNewContact();
         fillContactForm(contact, true);
+        submitContactCreation();
+        contactCache = null;
+        returnToHomePage();
+    }
+
+    public void createWithoutGroup(ContactData contactWithoutGroup, boolean b) {
+        initNewContact();
+        fillContactFormWithoutGroup(contactWithoutGroup, true);
         submitContactCreation();
         contactCache = null;
         returnToHomePage();
@@ -184,6 +204,13 @@ public class ContactHelper extends BaseHelper {
         click(By.name("add"));
     }
 
+    public void groupSelectionButton(ContactData contactData) {
+        click(By.name("group"));
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+        returnToHomePage();
+    }
+
+
     public ContactData addGrToCont(ContactData conts) {
         if ( conts.getGroups().size() > 0 ) {
             Assert.assertTrue(conts.getGroups().size() == 1);
@@ -194,44 +221,44 @@ public class ContactHelper extends BaseHelper {
 
 
             //for (ContactData grs : contacts) {
-              //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(grs.getGroups().iterator().next().getName());
-                //addToGroup();
+            //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(grs.getGroups().iterator().next().getName());
+            //addToGroup();
             //}
         }
         return conts;
     }
 }
-            //      groupCache.add(new GroupData().withId(id).withName(name));
-       // }
-       //ContactData cont =
-       // ContactData movedContact = before.iterator().next();
-        //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
-        //selectContactById(contact.getId());
-       // new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
-       // addToGroup();
-       // contactCache = null;
-       // returnToHomePage();
-      //  if ( contactData.getGroups().size() > 0 ) {
-      //      Assert.assertTrue(contactData.getGroups().size() == 1);
-      //      new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
-      //  }
-   // }
-    // List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    //    for (WebElement element: elements ) {
-    //      String name = element.getText();
-    //      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-    //      groupCache.add(new GroupData().withId(id).withName(name));
+//      groupCache.add(new GroupData().withId(id).withName(name));
+// }
+//ContactData cont =
+// ContactData movedContact = before.iterator().next();
+//new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
+//selectContactById(contact.getId());
+// new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+// addToGroup();
+// contactCache = null;
+// returnToHomePage();
+//  if ( contactData.getGroups().size() > 0 ) {
+//      Assert.assertTrue(contactData.getGroups().size() == 1);
+//      new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+//  }
+// }
+// List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+//    for (WebElement element: elements ) {
+//      String name = element.getText();
+//      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//      groupCache.add(new GroupData().withId(id).withName(name));
 
 
-    // public List<ContactData> list() {
-    //        List<ContactData> contacts = new ArrayList<ContactData>();
-    //        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]")); // строки
-    //        for (WebElement element : elements) {
-    //            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-    //            List<WebElement> cells = element.findElements(By.cssSelector("td"));
-    //            String lastname = cells.get(1).getText();
-    //            String name = cells.get(2).getText();
-    //            ContactData contact = new ContactData().withId(id).withSurname(lastname).withName(name);
-    //            contacts.add(contact);
-    //        }
-    //        return contacts;
+// public List<ContactData> list() {
+//        List<ContactData> contacts = new ArrayList<ContactData>();
+//        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]")); // строки
+//        for (WebElement element : elements) {
+//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//            List<WebElement> cells = element.findElements(By.cssSelector("td"));
+//            String lastname = cells.get(1).getText();
+//            String name = cells.get(2).getText();
+//            ContactData contact = new ContactData().withId(id).withSurname(lastname).withName(name);
+//            contacts.add(contact);
+//        }
+//        return contacts;

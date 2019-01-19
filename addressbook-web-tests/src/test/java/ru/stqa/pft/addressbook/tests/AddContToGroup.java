@@ -46,22 +46,28 @@ public class AddContToGroup extends TestBase {
     }
 
     @Test
-    public void addContToGroup() {
+    public void addContToGroup() { // почему на страницу групп переходит в приложении??
         app.goTo().homePage();
-       Contacts conBefore = app.db().contacts();
-       Groups grBefore = app.db().groups();
-        int grSizeBefore = grBefore.size();
-        List<ContactData> contGrs = new ArrayList<ContactData>();
-        for (ContactData grs : conBefore)
-            contGrs.add(grs);
-        ContactData movedCont = conBefore.iterator().next();
-        int grContSizeBefore = movedCont.getGroups().size();
-        if (movedCont.getGroups().size() < grBefore.size()) {
-            app.contact().modify(movedCont.inGroup(grBefore.iterator().next()));}
-            else app.group().create(new GroupData().withName("test3"));
-            app.contact().addGrToCont(movedCont.inGroup(grBefore.iterator().next()));
 
-        app.contact().addGrToCont(movedCont).getGroups();}
+        List<GroupData> groups = new ArrayList<GroupData>(app.db().groups());
+        List<ContactData> contacts = new ArrayList<ContactData>(app.db().contacts());
+        int contsInGr = contacts.size();
+        int grSizeBefore = groups.size();
+
+    //    app.contact().groupSelectionButton();
+        GroupData group = groups.iterator().next();
+        if ( group.getContacts().size() < contacts.size() ) {
+            ContactData movedCont = contacts.iterator().next();
+            group.withContact(movedCont);
+        }
+        else app.contact().create(new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru"), true);
+        ContactData movedCont = contacts.iterator().next();
+        group.withContact(movedCont);
+
+        //int after = group.getId().
+        //Assert.assertEquals(group.getContacts().size() + 1,);
+
+    }
 
 
 // Groups groups = app.db().groups();
@@ -69,44 +75,30 @@ public class AddContToGroup extends TestBase {
 //        Contacts before = app.db().contacts();
 //        app.contact().create(contact.inGroup(groups.iterator().next()), true);
 
-        //List<ContactData> cont = conBefore.iterator().next();
+    //List<ContactData> cont = conBefore.iterator().next();
 
-        // List<ContactData> conWithoutGr = app.contact().
+    // List<ContactData> conWithoutGr = app.contact().
 
-        //  for(GroupData contInGroups: )Groups grBefore  app.db().groups();
+    //  for(GroupData contInGroups: )Groups grBefore  app.db().groups();
 
 
-        //  ContactData movedContact = before.iterator().next();
-        //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
-        //app.contact().addToGroup();
-        //app.contact().addGroup(movedContact);
-        //app.goTo().homePage();
-        //}
-        //
-        //selectContactById(contact.getId());
-        //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
-        //addToGroup();
-        //contactCache = null;
-        //returnToHomePage();
-    }
+    //  ContactData movedContact = before.iterator().next();
+    //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
+    //app.contact().addToGroup();
+    //app.contact().addGroup(movedContact);
+    //app.goTo().homePage();
+    //}
+    //
+    //selectContactById(contact.getId());
+    //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+    //addToGroup();
+    //contactCache = null;
+    //returnToHomePage();
+}
 
 
 //Contacts dbContacts = app.db().contacts();
-    //assertThat(uiContacts, equalTo(dbContacts.stream().map((c) -> new ContactData().withId(c.getId())
-    //            .withName(c.getName()).withSurname(c.getSurname()).withAddress(c.getAddress()))
-    //            .collect(Collectors.toSet())));
+//assertThat(uiContacts, equalTo(dbContacts.stream().map((c) -> new ContactData().withId(c.getId())
+//            .withName(c.getName()).withSurname(c.getSurname()).withAddress(c.getAddress()))
+//            .collect(Collectors.toSet())));
 
-    // @Test
-    //    public void testHbConnection2() {
-    //        Session session = sessionFactory.openSession();
-    //        session.beginTransaction();
-    //        List<GroupData> result = session.createQuery( "from GroupData where deprecated = '0000-00-00' ").list();
-    //
-    //        session.getTransaction().commit();
-    //        session.close();
-    //
-    //        for ( GroupData group : result ) {
-    //            System.out.println(group);
-    //            System.out.println(group.getContacts());
-    //        }
-    //    }}
