@@ -64,8 +64,8 @@ public class AddContToGroup extends TestBase {
         ContactData movedCont = contacts.iterator().next();
         group.withContact(movedCont);
 
-        //int after = group.getId().
-        //Assert.assertEquals(group.getContacts().size() + 1,);
+        int after = group.withId(group.getId()).getContacts().size();
+        Assert.assertEquals(group.getContacts().size() + 1, after);
 
     }
 
