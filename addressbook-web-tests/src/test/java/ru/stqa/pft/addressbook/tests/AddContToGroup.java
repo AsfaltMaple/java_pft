@@ -53,9 +53,11 @@ public class AddContToGroup extends TestBase {
         List<ContactData> contacts = new ArrayList<ContactData>(app.db().contacts());
         int contsInGr = contacts.size();
         int grSizeBefore = groups.size();
-
-    //    app.contact().groupSelectionButton();
         GroupData group = groups.iterator().next();
+
+        contacts.removeAll(groups.iterator().next().getContacts());
+
+        app.contact().groupSelectionButton();
         if ( group.getContacts().size() < contacts.size() ) {
             ContactData movedCont = contacts.iterator().next();
             group.withContact(movedCont);
@@ -64,8 +66,7 @@ public class AddContToGroup extends TestBase {
         ContactData movedCont = contacts.iterator().next();
         group.withContact(movedCont);
 
-        int after = group.withId(group.getId()).getContacts().size();
-        Assert.assertEquals(group.getContacts().size() + 1, after);
+        Assert.assertEquals(group.getContacts().size() + 1, group.withId(group.getId()).getContacts().size());
 
     }
 
