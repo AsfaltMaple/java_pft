@@ -56,8 +56,8 @@ public class AddContToGroup extends TestBase {
         GroupData group = groups.iterator().next();
 
         contacts.removeAll(groups.iterator().next().getContacts());
-
-        app.contact().groupSelectionButton();
+        app.goTo().homePage();
+        app.group().groupSelectionButton(group);
         if ( group.getContacts().size() < contacts.size() ) {
             ContactData movedCont = contacts.iterator().next();
             group.withContact(movedCont);

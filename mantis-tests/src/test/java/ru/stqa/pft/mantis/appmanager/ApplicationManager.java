@@ -1,5 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -87,5 +88,32 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+
+    public void selectUser(String username) throws Exception {
+        loginAsAdmin();
+        listOfUsers("Invite Users", By.linkText("Manage Users"));
+        String userForResetPass = username;
+    }
+
+    public void listOfUsers(String s, By manage_users) {
+        wd.findElement(By.linkText(s)).click();
+        wd.findElement(manage_users).click();
+    }
+
+    public void loginAsAdmin() {
+        String loginPage = "http://localhost/mantisbt-2.19.0/login_page.php";
+        wd.get(loginPage);
+        wd.findElement(By.id("username")).clear();
+        wd.findElement(By.id("username")).sendKeys("administrator");
+        wd.findElement(By.xpath("//input[@value='Login']")).click();
+        wd.findElement(By.id("password")).clear();
+        wd.findElement(By.id("password")).sendKeys("root");
+        wd.findElement(By.xpath("//input[@value='Login']")).click();
+    }
+
+    public void resetPass() {
+        wd.findElement(By.xpath("//input[@value='Reset Password']")).click();
     }
 }

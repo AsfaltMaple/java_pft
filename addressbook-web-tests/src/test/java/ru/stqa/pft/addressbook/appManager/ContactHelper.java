@@ -204,11 +204,7 @@ public class ContactHelper extends BaseHelper {
         click(By.name("add"));
     }
 
-    public void groupSelectionButton(ContactData contactData) {
-        click(By.name("group"));
-        new Select(wd.findElement(By.name("group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
-        returnToHomePage();
-    }
+
 
 
     public ContactData addGrToCont(ContactData conts) {

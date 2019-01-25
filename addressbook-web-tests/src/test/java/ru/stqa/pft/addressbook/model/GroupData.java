@@ -96,6 +96,11 @@ public class GroupData {
         return this;
     }
 
+    public GroupData withoutContact (ContactData contact) {
+        contacts.remove(contact);
+        return this;
+    }
+
 
 }
 
