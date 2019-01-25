@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class RegistrationTests extends TestBase {
 
     //для теста James отключить
-   // @BeforeMethod
+    @BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
@@ -28,11 +28,11 @@ public class RegistrationTests extends TestBase {
         String user = String.format("user%s", now);
         String password = "password";
         String email = String.format("user%s@localhost.localdomain", now);
-        app.james().createUser(user, password); //для james test
+        //app.james().createUser(user, password); //для james test
         app.registration().start(user, email);
       //для встроенного включить
-       // List<MailMessage> mailMessages = app.mail().waitForMail(2, 80000);
-        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(2, 40000);
+        //List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
           String confirmationLink = findConfirmationLink(mailMessages, email);
 
         app.registration().finish(confirmationLink, password);

@@ -51,7 +51,7 @@ public class MailHelper {
     }
 
     public void start() {
-        wiser.setPort(1025);
+        wiser.setPort(1025); //для "перехвата" писем через fakesmtp в нем должен быть указан тот же порт, что и в конфиге мантис, а здесь - другой!
         wiser.start();}
 
     public void stop() {wiser.stop();}
