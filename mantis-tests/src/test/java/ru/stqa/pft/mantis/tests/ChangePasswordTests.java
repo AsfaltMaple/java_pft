@@ -13,18 +13,25 @@ public class ChangePasswordTests extends TestBase {
     @Test
     public void changePasswordTest() throws Exception {
         long now = System.currentTimeMillis();
-        String username = "qwe";
+        String user = String.format("user%s", now);
         String password = "password";
-        String email = "solentuna@gmail.com";
+        String email = String.format("user%s@localhost.localdomain", now);
+       // String username = "qwe";
+       // String password = "password";
+       // String email = "solentuna@gmail.com";
+        app.james().createUser(user, password);
+        app.registration().start(user, email);
+
+
         app.registration().loginAsAdmin();
         app.registration().listOfUsers();
-        app.registration().selectUser(username);
+        app.registration().selectUser(user);
         app.registration().resetPass();
-        List<MailMessage> mailMessages = app.james().waitForMail(username, password, 60000);
+        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
 
         app.registration().finish(confirmationLink, password);
-        assertTrue (app.newSession().login(username, password));
+        assertTrue (app.newSession().login(user, password));
     }
 
 }
