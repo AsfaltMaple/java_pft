@@ -33,4 +33,32 @@ public class RegistrationHelper extends HelperBase{
         VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
         return regex.getText(mailMessage.text);
     }
+
+
+    public void listOfUsers () throws Exception {
+        click(By.linkText("Invite Users"));
+        click(By.linkText("Manage Users"));
+
+    }
+
+    public void selectUser(String username) {
+        click(By.linkText(username));
+
+    }
+
+    public void loginAsAdmin() {
+        String loginPage = "http://localhost/mantisbt-2.19.0/login_page.php";
+        wd.get(loginPage);
+        wd.findElement(By.id("username")).clear();
+        wd.findElement(By.id("username")).sendKeys("administrator");
+        wd.findElement(By.xpath("//input[@value='Login']")).click();
+        wd.findElement(By.id("password")).clear();
+        wd.findElement(By.id("password")).sendKeys("root");
+        wd.findElement(By.xpath("//input[@value='Login']")).click();
+    }
+
+    public void resetPass() {
+        click(By.xpath("//input[@value='Reset Password']"));
+    }
 }
+
