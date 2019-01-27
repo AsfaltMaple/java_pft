@@ -101,7 +101,7 @@ public class GroupHelper extends BaseHelper { //помощник по работ
 
   public void groupSelectionButton(GroupData groupData) {
     click(By.name("group"));
-    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupData.getContacts().iterator().next().getName());
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupData.getName());
   }
 
 }
