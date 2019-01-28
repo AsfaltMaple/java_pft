@@ -19,8 +19,8 @@ public class ChangePasswordTests extends TestBase {
        // String username = "qwe";
        // String password = "password";
        // String email = "solentuna@gmail.com";
-        app.james().createUser(user, password);
-        app.registration().start(user, email);
+
+        //app.registration().start(user, email);
 
 
         app.registration().loginAsAdmin();
