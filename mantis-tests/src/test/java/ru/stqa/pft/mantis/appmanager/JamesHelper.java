@@ -26,6 +26,7 @@ public class JamesHelper {
     public JamesHelper(ApplicationManager app) {
         this.app = app;
         telnet = new TelnetClient();
+        System.setProperty("mail.pop3.port", "1100");
         mailSession = Session.getDefaultInstance(System.getProperties());
     }
 

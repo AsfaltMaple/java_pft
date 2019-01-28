@@ -32,7 +32,7 @@ public class RegistrationTests extends TestBase {
         app.registration().start(user, email);
         //для встроенного включить
         //List<MailMessage> mailMessages = app.mail().waitForMail(2, 40000);
-        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 80000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
 
         app.registration().finish(confirmationLink, password);
