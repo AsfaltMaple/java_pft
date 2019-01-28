@@ -41,14 +41,15 @@ public class RemoveContactFromGroup extends TestBase {
         //if ( sizeBefore < 1 ) {
         //    app.contact().create(contact.inGroup(selectedGr), true);
         //} else {
-            app.goTo().homePage();
-            app.group().groupSelectionButton(selectedGr);
-            Contacts contactsInGr = app.contact().all();
-            ContactData deletedContact = contactsInGr.iterator().next();
-            app.contact().delete(deletedContact);
-        }
-       // int sizeAfter = groups.iterator().next().getContacts().size();
-       // assertThat(after, equalTo(before.withoutContacts(modifiedContact).withAddedContacts(contact)));
+        app.goTo().homePage();
+        app.group().groupSelectionButton(selectedGr);
+        Contacts contactsInGr = app.contact().all();
+        ContactData deletedContact = contactsInGr.iterator().next();
+        app.contact().delete(deletedContact);
+
+        int sizeAfter = selectedGr.getContacts().size();
+        assertThat(sizeAfter, equalTo(sizeBefore - 1));
     }
+}
 
 
