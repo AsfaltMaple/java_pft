@@ -47,64 +47,34 @@ public class AddContToGroup extends TestBase {
 
     @Test
     public void addContToGroup() { // почему на страницу групп переходит в приложении??
-        app.goTo().homePage();
 
+        app.goTo().homePage();
         Groups groups = app.db().groups();
         Contacts contacts = app.db().contacts();
-      //  int contsInGr = contacts.size();
-      //  int grSizeBefore = groups.size();
         GroupData group = groups.iterator().next();
         Contacts contactsInSelectedGroup = group.getContacts();
         int contsInGr = contactsInSelectedGroup.size();
-        contacts.removeAll(contactsInSelectedGroup);
-        //System.out.println(contactsInSelectedGroup);
+        if ( group.getContacts().size() == contacts.size() ) {
+            app.goTo().homePage();
+            ContactData newCont = new ContactData();
+            app.contact().createWithoutGroup(new ContactData().withId(newCont.getId()).withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru"));
+        }
+
+
         app.goTo().homePage();
+        Contacts newContacts = app.db().contacts();
+        newContacts.removeAll(contactsInSelectedGroup);
         app.contact().selectContactById(contacts.iterator().next().getId());
         app.group().groupSelectionButton(group);
         app.contact().addToGroup();
-        if ( group.getContacts().size() < contacts.size() ) {
-            ContactData selectedCont = contacts.iterator().next();
-            group.withContact(selectedCont);
-        }
-        else {ContactData newCont = new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru");
-        group.withContact(newCont);}
-      //  Contacts contactsInSelectedGroupAfter = group.getContacts();
-       // int contsInGrAfter = contactsInSelectedGroup.size();
 
-        Assert.assertEquals(contsInGr + 1, group.withId(group.getId()).getContacts().size());
-
+       // ContactData selectedCont = contacts.iterator().next();
+       // group.withContact(selectedCont);
+       // app.group().groupSelectionButton(group);
+       // app.contact().addToGroup();
+        int contactsInSelectedGroupAfter = group.getContacts().size();
+        app.goTo().homePage();
+        Assert.assertEquals(contactsInSelectedGroupAfter, contactsInSelectedGroup.size() + 1);
     }
 
-
-// Groups groups = app.db().groups();
-//        app.goTo().homePage();
-//        Contacts before = app.db().contacts();
-//        app.contact().create(contact.inGroup(groups.iterator().next()), true);
-
-    //List<ContactData> cont = conBefore.iterator().next();
-
-    // List<ContactData> conWithoutGr = app.contact().
-
-    //  for(GroupData contInGroups: )Groups grBefore  app.db().groups();
-
-
-    //  ContactData movedContact = before.iterator().next();
-    //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(movedContact.getGroups().iterator().next().getName());
-    //app.contact().addToGroup();
-    //app.contact().addGroup(movedContact);
-    //app.goTo().homePage();
-    //}
-    //
-    //selectContactById(contact.getId());
-    //  new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
-    //addToGroup();
-    //contactCache = null;
-    //returnToHomePage();
 }
-
-
-//Contacts dbContacts = app.db().contacts();
-//assertThat(uiContacts, equalTo(dbContacts.stream().map((c) -> new ContactData().withId(c.getId())
-//            .withName(c.getName()).withSurname(c.getSurname()).withAddress(c.getAddress()))
-//            .collect(Collectors.toSet())));
-

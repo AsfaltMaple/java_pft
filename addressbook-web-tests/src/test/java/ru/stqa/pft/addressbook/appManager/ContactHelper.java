@@ -54,7 +54,7 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
-    public void fillContactFormWithoutGroup(ContactData contactData, boolean creation) {
+    public void fillContactFormWithoutGroup(ContactData contactData) {
         type(By.name("firstname"), contactData.getName());
         type(By.name("lastname"), contactData.getSurname());
         type(By.name("email"), contactData.getEmail());
@@ -122,9 +122,9 @@ public class ContactHelper extends BaseHelper {
         returnToHomePage();
     }
 
-    public void createWithoutGroup(ContactData contactWithoutGroup, boolean b) {
+    public void createWithoutGroup(ContactData contactWithoutGroup) {
         initNewContact();
-        fillContactFormWithoutGroup(contactWithoutGroup, true);
+        fillContactFormWithoutGroup(contactWithoutGroup);
         submitContactCreation();
         contactCache = null;
         returnToHomePage();
