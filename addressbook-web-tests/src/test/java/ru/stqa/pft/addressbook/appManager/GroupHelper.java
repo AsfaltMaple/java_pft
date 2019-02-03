@@ -104,4 +104,18 @@ public class GroupHelper extends BaseHelper { //помощник по работ
     new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupData.getName());
   }
 
+  public void selectedGroupPage(GroupData groupData) {
+    click(By.name("group"));
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupData.getName());
+  }
+  public void removeFromGroup() {
+
+    click(By.name("remove"));
+   // click(By.linkText("group page \" " + groupName));
+  }
+
+  public void returnToModGr(GroupData groupData){
+    click(By.linkText("group page " + "\"" + groupData.getName() + "\""));
+  }
+
 }

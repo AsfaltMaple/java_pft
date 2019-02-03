@@ -35,10 +35,6 @@ public class AddContToGroup extends TestBase {
             app.contact().create(new ContactData().
                     withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru"), true);
         }
-    }
-
-    @BeforeMethod
-    public void ensurePreconditionsGr() {
         app.goTo().groupPage();
         if ( app.db().groups().size() == 0 ) {
             app.group().create(new GroupData().withName("test1"));
