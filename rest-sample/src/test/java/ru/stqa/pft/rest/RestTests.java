@@ -53,7 +53,4 @@ public class RestTests extends TestBase{
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
 
     }
-   // protected Executor getExecutor() {
-     //   return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
-   // }
 }

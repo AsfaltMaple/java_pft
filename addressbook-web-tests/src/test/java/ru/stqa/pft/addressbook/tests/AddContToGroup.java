@@ -49,24 +49,29 @@ public class AddContToGroup extends TestBase {
     public void addContToGroup() { // почему на страницу групп переходит в приложении??
         app.goTo().homePage();
 
-        List<GroupData> groups = new ArrayList<GroupData>(app.db().groups());
-        List<ContactData> contacts = new ArrayList<ContactData>(app.db().contacts());
-        int contsInGr = contacts.size();
-        int grSizeBefore = groups.size();
+        Groups groups = app.db().groups();
+        Contacts contacts = app.db().contacts();
+      //  int contsInGr = contacts.size();
+      //  int grSizeBefore = groups.size();
         GroupData group = groups.iterator().next();
-
-        contacts.removeAll(groups.iterator().next().getContacts());
+        Contacts contactsInSelectedGroup = group.getContacts();
+        int contsInGr = contactsInSelectedGroup.size();
+        contacts.removeAll(contactsInSelectedGroup);
+        //System.out.println(contactsInSelectedGroup);
         app.goTo().homePage();
+        app.contact().selectContactById(contacts.iterator().next().getId());
         app.group().groupSelectionButton(group);
+        app.contact().addToGroup();
         if ( group.getContacts().size() < contacts.size() ) {
-            ContactData movedCont = contacts.iterator().next();
-            group.withContact(movedCont);
+            ContactData selectedCont = contacts.iterator().next();
+            group.withContact(selectedCont);
         }
-        else app.contact().create(new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru"), true);
-        ContactData movedCont = contacts.iterator().next();
-        group.withContact(movedCont);
+        else {ContactData newCont = new ContactData().withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru");
+        group.withContact(newCont);}
+      //  Contacts contactsInSelectedGroupAfter = group.getContacts();
+       // int contsInGrAfter = contactsInSelectedGroup.size();
 
-        Assert.assertEquals(group.getContacts().size() + 1, group.withId(group.getId()).getContacts().size());
+        Assert.assertEquals(contsInGr + 1, group.withId(group.getId()).getContacts().size());
 
     }
 

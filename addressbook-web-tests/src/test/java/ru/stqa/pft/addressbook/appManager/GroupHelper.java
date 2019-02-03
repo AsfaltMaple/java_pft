@@ -100,8 +100,8 @@ public class GroupHelper extends BaseHelper { //помощник по работ
   }
 
   public void groupSelectionButton(GroupData groupData) {
-    click(By.name("group"));
-    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupData.getName());
+    click(By.name("to_group"));
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupData.getName());
   }
 
 }

@@ -22,7 +22,7 @@ public class TestBase {
         } else
         {return false;}
     }
-      //  return new Gson().fromJson(issues, new TypeToken <Set<Issue>>(){}.getType());
+
     public Set<Issue> state_name(int issueId) throws IOException {
         String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues/"  + issueId +".json"))
                 .returnContent().asString();
