@@ -2,6 +2,7 @@ package ru.stqa.pft.rest;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.http.client.fluent.Executor;
@@ -27,7 +28,9 @@ public class TestBase {
         String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues/"  + issueId +".json"))
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
-        JsonElement issueState = parsed.getAsJsonObject().get("state_name");
+        JsonElement list = parsed.getAsJsonObject().get("issues");
+        JsonElement issue = list.getAsJsonArray().get(0);
+        JsonElement issueState = issue.getAsJsonObject().get("state_name");
         return new Gson().fromJson(issueState, new TypeToken<Set<Issue>>() {
         }.getType());
 
