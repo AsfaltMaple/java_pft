@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+//вернуть в testing-groups- <class name="ru.stqa.pft.addressbook.tests.GroupCreation" />
 
 public class GroupCreation extends TestBase {
   Logger logger = LoggerFactory.getLogger(GroupCreation.class);
