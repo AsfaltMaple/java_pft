@@ -18,20 +18,20 @@ public class TestBase {
 
 
     public boolean isIssueOpen(int issueId) throws IOException {
-        if( Arrays.asList(state_name(issueId)).equals("Resolved")){
+        if( state_name(issueId).equals("Resolved")){
             return true;
         } else
         {return false;}
     }
 
-    public Set<Issue> state_name(int issueId) throws IOException {
+    public String state_name(int issueId) throws IOException {
         String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues/"  + issueId +".json"))
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement list = parsed.getAsJsonObject().get("issues");
         JsonElement issue = list.getAsJsonArray().get(0);
         JsonElement issueState = issue.getAsJsonObject().get("state_name");
-        return new Gson().fromJson(issueState, new TypeToken<Set<Issue>>() {
+        return new Gson().fromJson(issueState, new TypeToken<String>() {
         }.getType());
 
     }
