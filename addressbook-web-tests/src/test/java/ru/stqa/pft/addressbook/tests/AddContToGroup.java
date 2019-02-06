@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.hibernate.Session;
 import org.hibernate.SessionBuilder;
 import org.hibernate.SessionFactory;
@@ -56,21 +57,28 @@ public class AddContToGroup extends TestBase {
             app.contact().createWithoutGroup(new ContactData().withId(newCont.getId()).withSurname("severnaya2").withName("Brusnika2").withEmail("brus2@sever.ru"));
         }
 
-
         app.goTo().homePage();
         Contacts newContacts = app.db().contacts();
         newContacts.removeAll(contactsInSelectedGroup);
-        app.contact().selectContactById(contacts.iterator().next().getId());
+        //ContactData selectedContact = newContacts.iterator().next();
+
+        int contactId = newContacts.iterator().next().getId();
+        app.contact().selectContactById(contactId);
         app.group().groupSelectionButton(group);
         app.contact().addToGroup();
+        Contacts allContactsAfter = app.db().contacts();
+        Contacts newContactsinGroup = group.getContacts();
+        Contacts allContacts = app.contact().all();
+        ContactData selectedContact = allContacts.;
 
        // ContactData selectedCont = contacts.iterator().next();
        // group.withContact(selectedCont);
        // app.group().groupSelectionButton(group);
        // app.contact().addToGroup();
-        int contactsInSelectedGroupAfter = group.getContacts().size();
+      //  int contactsInSelectedGroupAfter = group.getContacts().size();
         app.goTo().homePage();
-        Assert.assertEquals(contactsInSelectedGroupAfter, contactsInSelectedGroup.size() + 1);
+        MatcherAssert.assertThat(contactsInSelectedGroup.withAddedContacts(selectedContact), equalTo(newContactsinGroup));
     }
 
 }
+//contactsInSelectedGroupAfter, contactsInSelectedGroup.size() + 1)

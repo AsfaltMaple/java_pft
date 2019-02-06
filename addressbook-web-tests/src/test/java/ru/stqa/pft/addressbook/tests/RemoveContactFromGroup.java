@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -37,22 +38,28 @@ public class RemoveContactFromGroup extends TestBase {
         Contacts contacts = app.db().contacts();
         GroupData selectedGr = groups.iterator().next();
         if (selectedGr.getContacts().size() == 0){
-            app.contact().create(new ContactData().withName("test").withSurname("testoviy"), true);
             app.goTo().homePage();
-            app.contact().selectContactById(contacts.iterator().next().getId());
+            app.contact().selectContact(0);
             app.group().groupSelectionButton(selectedGr);
             app.contact().addToGroup();
+           // app.contact().selectContactById(contacts.iterator().next().getId());
+           // app.group().groupSelectionButton(selectedGr);
+           // app.contact().addToGroup();
         }
         app.goTo().homePage();
         app.group().selectedGroupPage(selectedGr);
         Contacts contactsInGroup = selectedGr.getContacts();
-        int sizeBefore = contactsInGroup.size();
-        app.contact().selectContactById(contactsInGroup.iterator().next().getId());
+        app.goTo().homePage();
+        //int sizeBefore = contactsInGroup.size();
+        ContactData selectedContact = app.contact().all().iterator().next();
+       // app.contact().selectContactById(contactsInGroup.iterator().next().getId());
         app.group().removeFromGroup();
         app.group().returnToModGr(selectedGr);
+        Contacts contactsAfter = app.db().contacts();
         Contacts contactsInGroupAfter = selectedGr.getContacts();
-        int sizeAfter = contactsInGroupAfter.size();
-        Assert.assertEquals(sizeBefore, sizeAfter - 1);
+        //int sizeAfter = contactsInGroupAfter.size();
+        MatcherAssert.assertThat(contactsInGroup.withoutContacts(selectedContact), equalTo(contactsInGroupAfter));
+        //Assert.assertEquals(sizeBefore, sizeAfter - 1);
     }
 }
 
