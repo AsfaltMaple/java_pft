@@ -42,24 +42,17 @@ public class RemoveContactFromGroup extends TestBase {
             app.contact().selectContact(0);
             app.group().groupSelectionButton(selectedGr);
             app.contact().addToGroup();
-           // app.contact().selectContactById(contacts.iterator().next().getId());
-           // app.group().groupSelectionButton(selectedGr);
-           // app.contact().addToGroup();
         }
         app.goTo().homePage();
         app.group().selectedGroupPage(selectedGr);
         Contacts contactsInGroup = selectedGr.getContacts();
         app.goTo().homePage();
-        //int sizeBefore = contactsInGroup.size();
         ContactData selectedContact = app.contact().all().iterator().next();
-       // app.contact().selectContactById(contactsInGroup.iterator().next().getId());
         app.group().removeFromGroup();
         app.group().returnToModGr(selectedGr);
         Contacts contactsAfter = app.db().contacts();
         Contacts contactsInGroupAfter = selectedGr.getContacts();
-        //int sizeAfter = contactsInGroupAfter.size();
         MatcherAssert.assertThat(contactsInGroup.withoutContacts(selectedContact), equalTo(contactsInGroupAfter));
-        //Assert.assertEquals(sizeBefore, sizeAfter - 1);
     }
 }
 

@@ -60,25 +60,33 @@ public class AddContToGroup extends TestBase {
         app.goTo().homePage();
         Contacts newContacts = app.db().contacts();
         newContacts.removeAll(contactsInSelectedGroup);
+
         //ContactData selectedContact = newContacts.iterator().next();
 
         int contactId = newContacts.iterator().next().getId();
+
         app.contact().selectContactById(contactId);
         app.group().groupSelectionButton(group);
         app.contact().addToGroup();
         Contacts allContactsAfter = app.db().contacts();
-        Contacts newContactsinGroup = group.getContacts();
-        Contacts allContacts = app.contact().all();
-        ContactData selectedContact = allContacts.;
+        Groups groupsAfter = app.db().groups();
 
-       // ContactData selectedCont = contacts.iterator().next();
-       // group.withContact(selectedCont);
-       // app.group().groupSelectionButton(group);
-       // app.contact().addToGroup();
-      //  int contactsInSelectedGroupAfter = group.getContacts().size();
         app.goTo().homePage();
-        MatcherAssert.assertThat(contactsInSelectedGroup.withAddedContacts(selectedContact), equalTo(newContactsinGroup));
+        app.group().selectedGroupPage(group);
+        Contacts contactsInGroup = group.getContacts();
+        ContactData contact = findContact(contactId);
+
+        app.goTo().homePage();
+        MatcherAssert.assertThat(contactsInSelectedGroup.withAddedContacts(contact), equalTo(contactsInGroup));
+    }
+
+    public ContactData findContact(int contactId) {
+        ContactData cont = new ContactData();
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            if ( contact.getId() == contactId )
+        cont = contact;}
+        return cont;
     }
 
 }
-//contactsInSelectedGroupAfter, contactsInSelectedGroup.size() + 1)

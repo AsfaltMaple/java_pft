@@ -209,6 +209,8 @@ public class ContactHelper extends BaseHelper {
 
 
 
+
+
     public ContactData addGrToCont(ContactData conts) {
         if ( conts.getGroups().size() > 0 ) {
             Assert.assertTrue(conts.getGroups().size() == 1);
