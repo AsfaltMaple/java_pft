@@ -73,11 +73,12 @@ public class AddContToGroup extends TestBase {
 
         app.goTo().homePage();
         app.group().selectedGroupPage(group);
-        Contacts contactsInGroup = group.getContacts();
+        Contacts newContInG = app.contact().all();
+        //Contacts contactsInGroup = group.getContacts();
         ContactData contact = findContact(contactId);
 
         app.goTo().homePage();
-        MatcherAssert.assertThat(contactsInSelectedGroup.withAddedContacts(contact), equalTo(contactsInGroup));
+        MatcherAssert.assertThat(contactsInSelectedGroup.withAddedContacts(contact), equalTo(newContInG));
     }
 
     public ContactData findContact(int contactId) {
