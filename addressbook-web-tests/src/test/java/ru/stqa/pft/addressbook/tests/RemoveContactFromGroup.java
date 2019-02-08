@@ -37,22 +37,52 @@ public class RemoveContactFromGroup extends TestBase {
         Groups groups = app.db().groups();
         Contacts contacts = app.db().contacts();
         GroupData selectedGr = groups.iterator().next();
-        if (selectedGr.getContacts().size() == 0){
+        int groupId = selectedGr.getId();
+        //старое множ контактов в группе
+        if ( selectedGr.getContacts().size() == 0 ) {
             app.goTo().homePage();
             app.contact().selectContact(0);
             app.group().groupSelectionButton(selectedGr);
             app.contact().addToGroup();
         }
+        Contacts newContacts = app.db().contacts();
+        Groups newGroups = app.db().groups();
+        Contacts contactsInSelectedGroup = findGroup(groupId).getContacts();
+
         app.goTo().homePage();
         app.group().selectedGroupPage(selectedGr);
-        Contacts contactsInGroup = selectedGr.getContacts();
-        app.goTo().homePage();
-        ContactData selectedContact = app.contact().all().iterator().next();
+        ContactData contact = contactsInSelectedGroup.iterator().next();
+        int contactId = contactsInSelectedGroup.iterator().next().getId();
+
+        app.contact().selectContactById(contactId);
         app.group().removeFromGroup();
         app.group().returnToModGr(selectedGr);
         Contacts contactsAfter = app.db().contacts();
-        Contacts contactsInGroupAfter = selectedGr.getContacts();
-        MatcherAssert.assertThat(contactsInGroup.withoutContacts(selectedContact), equalTo(contactsInGroupAfter));
+        Groups groupsAfter = app.db().groups();
+        ContactData selectedContact = findContact(contactId);
+        Contacts contactsInGroupAfter = findGroup(groupId).getContacts();
+
+        MatcherAssert.assertThat(contactsInSelectedGroup.withoutContacts(selectedContact), equalTo(contactsInGroupAfter));
+    }
+
+    public ContactData findContact(int contactId) {
+        ContactData cont = new ContactData();
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            if ( contact.getId() == contactId )
+                cont = contact;
+        }
+        return cont;
+    }
+
+    public GroupData findGroup(int groupId) {
+        GroupData gr = new GroupData();
+        Groups groups = app.db().groups();
+        for (GroupData group : groups) {
+            if ( group.getId() == groupId )
+                gr = group;
+        }
+        return gr;
     }
 }
 
